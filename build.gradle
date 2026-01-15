@@ -1,0 +1,39 @@
+plugins {
+    id("java")
+}
+
+group = "org.example"
+version = "1.0-SNAPSHOT"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation(platform("org.junit:junit-bom:5.10.0"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
+
+    // Spark Core 및 Spark SQL 의존성
+    // Source: https://mvnrepository.com/artifact/org.apache.spark/spark-core
+    implementation 'org.apache.spark:spark-core_2.13:3.5.5'
+    implementation 'org.apache.spark:spark-sql_2.13:3.5.5'
+
+    // Spark-Kafka 연결을 위한 의존성
+    implementation 'org.apache.spark:spark-sql-kafka-0-10_2.13:3.5.5'
+
+    // Jackson 라이브러리 (JSON 파싱용)
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.0'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.15.0'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.15.0'
+
+    // Lombok (WebLog 클래스의 편의성 제공)
+    compileOnly 'org.projectlombok:lombok:1.18.26'
+    annotationProcessor 'org.projectlombok:lombok:1.18.26'
+
+
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+}
+
+tasks.test {
+    useJUnitPlatform()
+}
